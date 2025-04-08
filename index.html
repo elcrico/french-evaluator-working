@@ -15,26 +15,26 @@
   <h1>French Evaluator Tool</h1>
   <textarea id="studentText" placeholder="Paste French writing here..."></textarea>
   <br />
-  <button onclick="checkProficiency()">Evaluate</button>
+<button onclick="checkProficiency()">Evaluate</button>
   <div id="result"></div>
 
   <script>
-    async function evaluate() {
-      const text = document.getElementById("studentText").value;
-      const resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = "⏳ Evaluating...";
-      try {
-        const response = await fetch('/api/evaluate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text })
-        });
-        const data = await response.json();
-        resultDiv.innerHTML = `<strong>Proficiency:</strong> ${data.proficiency}`;
-      } catch (err) {
-        resultDiv.innerHTML = "❌ Error evaluating text.";
-      }
+  async function checkProficiency() {
+    const text = document.getElementById("studentText").value;
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "⏳ Evaluating...";
+    try {
+      const response = await fetch('/api/evaluate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+      const data = await response.json();
+      resultDiv.innerHTML = `<strong>Proficiency:</strong> ${data.proficiency}`;
+    } catch (err) {
+      resultDiv.innerHTML = "❌ Error evaluating text.";
     }
-  </script>
+  }
+</script>
 </body>
 </html>
